@@ -1,6 +1,3 @@
-/* Week 5 Portfolio - Starter Styles
-   Students will transform this with Flexbox and Grid */
-
 /* CSS Reset and Base Styles */
 * {
     margin: 0;
@@ -9,13 +6,16 @@
 }
 
 :root {
-    /* Color Variables */
-    --primary-color: #667eea;
-    --secondary-color: #764ba2;
+    /* UC Berkeley Brand Colors */
+    --primary-color: #003262;   /* Berkeley Blue */
+    --secondary-color: #FDB515; /* California Gold */
+    --primary-hover: #002142;
+    --gold-hover: #e09e00;
+
     --text-dark: #2d3748;
-    --text-light: #718096;
-    --bg-light: #f7fafc;
-    --bg-dark: #2d3748;
+    --text-light: #4a5568;
+    --bg-light: #f8fafc;
+    --bg-dark: #001f3f;
     --white: #ffffff;
     --border-color: #e2e8f0;
 
@@ -28,7 +28,6 @@
 
     /* Typography */
     --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-    --font-mono: 'Courier New', monospace;
 }
 
 body {
@@ -38,7 +37,6 @@ body {
     background: var(--white);
 }
 
-/* Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -61,8 +59,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 { font-size: 3rem; }
-h2 { font-size: 2.5rem; }
-h3 { font-size: 1.5rem; }
+h2 { 
+    font-size: 2.5rem; 
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+h3 { font-size: 1.3rem; }
 
 p {
     margin-bottom: var(--spacing-sm);
@@ -78,29 +81,31 @@ a:hover {
     color: var(--secondary-color);
 }
 
-/* Navigation Bar - TO BE ENHANCED WITH FLEXBOX */
+/* Navigation Bar */
 #navbar {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: var(--primary-color);
+    border-bottom: 3px solid var(--secondary-color);
     padding: var(--spacing-sm) var(--spacing-md);
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .nav-brand {
-    color: var(--white);
+    color: var(--secondary-color);
     font-size: 1.5rem;
-    font-weight: bold;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 .nav-menu {
     list-style: none;
-}
-
-.nav-menu li {
-    display: inline-block;
-    margin-left: var(--spacing-md);
+    display: flex;
+    gap: var(--spacing-md);
 }
 
 .nav-link {
@@ -108,54 +113,81 @@ a:hover {
     font-weight: 500;
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: 4px;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-.nav-link:hover {
-    background: rgba(255,255,255,0.1);
-    color: var(--white);
+.nav-link:hover, 
+.nav-link.active {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: 600;
 }
 
 /* Mobile Menu Toggle */
 .nav-toggle {
     display: none;
     width: 30px;
-    height: 30px;
+    height: 22px;
     cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .nav-toggle span {
     display: block;
     width: 100%;
     height: 3px;
-    background: var(--white);
-    margin: 5px 0;
+    background: var(--secondary-color);
+    border-radius: 2px;
     transition: 0.3s;
 }
 
-/* Hero Section - TO BE ENHANCED WITH FLEXBOX */
+/* Hero Section */
 .hero {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #001f3f 100%);
     color: var(--white);
     padding: var(--spacing-xl) var(--spacing-md);
-    min-height: 60vh;
+    min-height: 65vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--secondary-color);
 }
 
 .hero-title {
     font-size: 3.5rem;
-    margin-bottom: var(--spacing-sm);
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-xs);
 }
 
 .hero-subtitle {
     font-size: 1.5rem;
-    opacity: 0.9;
-    margin-bottom: var(--spacing-xs);
+    opacity: 0.95;
+    margin-bottom: var(--spacing-sm);
 }
 
 .hero-tagline {
     font-size: 1.1rem;
-    opacity: 0.8;
-    margin-bottom: var(--spacing-md);
+    opacity: 0.85;
+    max-width: 650px;
+    margin: 0 auto var(--spacing-lg);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
 }
 
 /* Buttons */
@@ -163,7 +195,7 @@ a:hover {
     display: inline-block;
     padding: 0.75rem 2rem;
     border-radius: 50px;
-    font-weight: 500;
+    font-weight: 600;
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
@@ -171,33 +203,33 @@ a:hover {
 }
 
 .btn-primary {
-    background: var(--white);
+    background: var(--secondary-color);
     color: var(--primary-color);
 }
 
 .btn-primary:hover {
+    background: var(--gold-hover);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(253, 181, 21, 0.4);
 }
 
 .btn-secondary {
     background: transparent;
     color: var(--white);
-    border: 2px solid var(--white);
+    border: 2px solid var(--secondary-color);
 }
 
 .btn-secondary:hover {
-    background: var(--white);
+    background: var(--secondary-color);
     color: var(--primary-color);
 }
 
-/* About Section - TO BE ENHANCED WITH GRID */
+/* About Section */
 .about-grid {
-    margin-top: var(--spacing-md);
-}
-
-.about-text {
-    margin-bottom: var(--spacing-md);
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: start;
 }
 
 .about-details {
@@ -205,66 +237,61 @@ a:hover {
 }
 
 .detail-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
     margin-bottom: var(--spacing-sm);
-}
-
-.detail-icon {
-    margin-right: var(--spacing-xs);
-}
-
-.availability-tags {
-    margin-top: var(--spacing-sm);
 }
 
 .tag {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
+    padding: 0.35rem 0.85rem;
     border-radius: 20px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 500;
     margin-right: var(--spacing-xs);
     margin-bottom: var(--spacing-xs);
 }
 
 .tag-available {
-    background: #48bb78;
-    color: white;
+    background: #e2e8f0;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
 }
 
-/* Skills Section - TO BE TRANSFORMED WITH GRID */
+/* Skills Section */
 .skills-grid {
-    margin-top: var(--spacing-md);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-md);
 }
 
 .skill-card {
     background: var(--white);
     padding: var(--spacing-md);
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin-bottom: var(--spacing-md);
-    transition: transform 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-top: 3px solid var(--secondary-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .skill-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
 
 .skill-header {
-    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-bottom: 0.25rem;
 }
 
-.skill-icon {
-    font-size: 2rem;
-    margin-right: var(--spacing-sm);
-}
-
-.skill-name {
-    display: inline;
-}
+.skill-icon { font-size: 1.5rem; }
 
 .skill-category {
     color: var(--text-light);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     margin-bottom: var(--spacing-sm);
 }
 
@@ -273,103 +300,92 @@ a:hover {
     background: #e2e8f0;
     border-radius: 4px;
     overflow: hidden;
-    margin: var(--spacing-sm) 0;
+    margin: var(--spacing-xs) 0;
 }
 
 .skill-progress {
     height: 100%;
     background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    width: var(--skill-level);
-    transition: width 1s ease;
-    animation: fillProgress 1s ease forwards;
-}
-
-@keyframes fillProgress {
-    from { width: 0; }
-    to { width: var(--skill-level); }
+    width: 0; /* Animated by JS */
+    transition: width 1.2s ease-in-out;
 }
 
 .skill-percentage {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--text-light);
+    float: right;
 }
 
-/* Projects Section - TO BE ENHANCED WITH GRID */
-/* Filter Buttons - Week 7 Addition */
+/* Projects Section */
 .filter-buttons {
     display: flex;
     justify-content: center;
-    gap: var(--spacing-sm);
-    margin: var(--spacing-md) 0;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-lg);
     flex-wrap: wrap;
 }
 
 .filter-btn {
-    padding: var(--spacing-xs) var(--spacing-md);
+    padding: 0.5rem 1.25rem;
     border: 2px solid var(--primary-color);
     background: transparent;
     color: var(--primary-color);
     border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 1rem;
     font-weight: 500;
 }
 
-.filter-btn:hover {
-    background: var(--primary-color);
-    color: var(--white);
-    transform: translateY(-2px);
-}
-
+.filter-btn:hover,
 .filter-btn.active {
     background: var(--primary-color);
     color: var(--white);
 }
 
 .projects-grid {
-    margin-top: var(--spacing-md);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-md);
 }
 
 .project-card {
     background: var(--white);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-bottom: var(--spacing-md);
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
 .project-image {
     position: relative;
+    height: 200px;
     overflow: hidden;
-    height: 250px;
 }
 
 .project-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
 }
 
 .project-card:hover .project-image img {
-    transform: scale(1.1);
+    transform: scale(1.08);
 }
 
 .project-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.8);
+    inset: 0;
+    background: rgba(0, 50, 98, 0.85);
     opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: opacity 0.3s ease;
 }
 
@@ -377,26 +393,19 @@ a:hover {
     opacity: 1;
 }
 
-.project-links {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
 .project-link {
-    display: inline-block;
     color: var(--white);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    margin: var(--spacing-xs);
-    border: 2px solid var(--white);
-    border-radius: 25px;
+    padding: 0.4rem 1rem;
+    margin: 0 0.25rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    background: rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
 }
 
 .project-link:hover {
-    background: var(--white);
+    background: var(--secondary-color);
     color: var(--primary-color);
 }
 
@@ -405,69 +414,80 @@ a:hover {
 }
 
 .project-header {
-    margin-bottom: var(--spacing-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
 }
 
 .project-title {
-    color: var(--text-dark);
+    color: var(--primary-color);
+    font-size: 1.2rem;
 }
 
 .project-category {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
     background: var(--bg-light);
     color: var(--text-light);
-    border-radius: 15px;
-    font-size: 0.85rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
 }
 
 .project-description {
     color: var(--text-light);
+    font-size: 0.95rem;
     margin-bottom: var(--spacing-sm);
 }
 
 .project-tags {
-    margin-top: var(--spacing-sm);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
 }
 
 .project-tag {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    font-size: 0.75rem;
+    background: var(--primary-color);
     color: var(--white);
-    border-radius: 15px;
-    font-size: 0.85rem;
-    margin-right: var(--spacing-xs);
-    margin-bottom: var(--spacing-xs);
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
 }
 
-/* Contact Form - TO BE ENHANCED WITH GRID */
+/* Contact Form */
 .contact-content {
-    max-width: 800px;
+    max-width: 700px;
     margin: 0 auto;
+    text-align: center;
 }
 
 .contact-form {
-    margin-top: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+    text-align: left;
 }
 
-.form-group {
-    margin-bottom: var(--spacing-md);
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+.form-group-full {
+    grid-column: span 2;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: var(--spacing-xs);
-    font-weight: 500;
-    color: var(--text-dark);
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+    color: var(--primary-color);
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: var(--spacing-sm);
+    padding: 0.75rem;
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 1rem;
     transition: border-color 0.3s ease;
 }
@@ -476,16 +496,13 @@ a:hover {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 50, 98, 0.1);
 }
 
-.form-group textarea {
-    resize: vertical;
-}
-
-/* Form Validation Styles - Week 7 Addition */
+/* Validation Styles */
 .error-message {
     color: #dc2626;
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     margin-top: 0.25rem;
     display: block;
 }
@@ -502,60 +519,69 @@ a:hover {
 
 .success-message {
     background: #d1fae5;
-    color: #059669;
-    padding: var(--spacing-sm);
-    border-radius: 8px;
-    margin-top: var(--spacing-md);
+    color: #065f46;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
     text-align: center;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 /* Footer */
 .footer {
-    background: var(--bg-dark);
+    background: var(--primary-color);
     color: var(--white);
     padding: var(--spacing-lg) 0;
     text-align: center;
-}
-
-.footer-content {
-    margin-bottom: var(--spacing-md);
+    border-top: 3px solid var(--secondary-color);
 }
 
 .social-links {
-    margin-top: var(--spacing-md);
+    margin-top: var(--spacing-sm);
 }
 
 .social-link {
-    display: inline-block;
-    color: var(--white);
-    margin: 0 var(--spacing-sm);
-    text-transform: capitalize;
-    transition: color 0.3s ease;
+    color: var(--secondary-color);
+    margin: 0 var(--spacing-xs);
+    transition: opacity 0.3s ease;
 }
 
 .social-link:hover {
-    color: var(--primary-color);
+    opacity: 0.8;
 }
 
-/* Responsive Design - Basic */
+/* Responsive Navigation Styles */
 @media (max-width: 768px) {
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.75rem; }
-
-    .hero-title { font-size: 2.5rem; }
-    .hero-subtitle { font-size: 1.25rem; }
-
-    .section {
-        padding: var(--spacing-lg) 0;
+    .nav-toggle {
+        display: flex;
     }
-}
 
-/* Utility Classes */
-.text-center { text-align: center; }
-.mt-1 { margin-top: var(--spacing-sm); }
-.mt-2 { margin-top: var(--spacing-md); }
-.mt-3 { margin-top: var(--spacing-lg); }
-.mb-1 { margin-bottom: var(--spacing-sm); }
-.mb-2 { margin-bottom: var(--spacing-md); }
-.mb-3 { margin-bottom: var(--spacing-lg); }
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 60px;
+        flex-direction: column;
+        background-color: var(--primary-color);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0,0,0,0.2);
+        padding: var(--spacing-md) 0;
+        gap: var(--spacing-sm);
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .about-grid, .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group-full {
+        grid-column: span 1;
+    }
+
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+}
